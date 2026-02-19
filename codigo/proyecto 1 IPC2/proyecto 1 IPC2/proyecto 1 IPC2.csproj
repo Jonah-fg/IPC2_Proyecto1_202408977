@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modelos\Class1.cs" />
+    <Compile Include="Modelos\ListaPacientes.cs" />
+    <Compile Include="Modelos\NodoPaciente.cs" />
+    <Compile Include="Modelos\Paciente.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
