@@ -58,7 +58,7 @@ namespace proyecto_1_IPC2.Modelos
 
             while (actual != null)
             {
-                Console.WriteLine("Paciente: " + actual.Dato.Nombre);
+                Console.WriteLine("Paciente: "+ actual.Dato.Nombre);
                 actual = actual.Siguiente;
             }
         }

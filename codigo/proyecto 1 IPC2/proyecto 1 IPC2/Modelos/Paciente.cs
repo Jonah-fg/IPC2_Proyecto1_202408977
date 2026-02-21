@@ -13,7 +13,7 @@ namespace proyecto_1_IPC2.Modelos
         public int M { get; set; }
         public int PeriodosMax { get; set; }
         public string Resultado { get; set; }
-        public int[,] RejillaInicial { get; set; }
+        public Rejilla RejillaInicial { get; set; }
         public int N { get; set; }
         public int N1 { get; set; }
 
@@ -22,9 +22,28 @@ namespace proyecto_1_IPC2.Modelos
             Nombre = nombre;
             Edad = edad;
             M = m;
-            RejillaInicial = new int[m, m];
+            RejillaInicial = new Rejilla(m);
             PeriodosMax = periodos;
             
+        }
+
+        public void Simulacion() 
+        {
+            Rejilla actual = RejillaInicial;
+
+            for (int periodo = 1; periodo<= PeriodosMax; periodo++)
+            {
+                Rejilla siguiente = actual.GenerarSiguienteRejilla();
+
+                // Si todas murieron
+                if (siguiente.ContarContagiadas() == 0)
+                {
+                    Resultado = "Mortal";
+                    return;
+                }
+                actual = siguiente;
+            }
+            Resultado = "Grave";
         }
     }
 }
