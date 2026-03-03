@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\LectorXML.cs" />
+    <Compile Include="Modelos\ListaEstado.cs" />
     <Compile Include="Modelos\ListaPacientes.cs" />
+    <Compile Include="Modelos\NodoEstado.cs" />
     <Compile Include="Modelos\NodoPaciente.cs" />
     <Compile Include="Modelos\Paciente.cs" />
     <Compile Include="Modelos\Rejilla.cs" />

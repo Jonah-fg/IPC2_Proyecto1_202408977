@@ -9,7 +9,6 @@ namespace proyecto_1_IPC2.Modelos
     internal class ListaPacientes
     {
         private NodoPaciente Cabeza; 
-
         public ListaPacientes()
         {
             Cabeza =null;
@@ -27,7 +26,7 @@ namespace proyecto_1_IPC2.Modelos
             {
                 NodoPaciente actual=Cabeza;
 
-                while (actual.Siguiente != null)
+                while (actual.Siguiente!= null)
                 {
                     actual =actual.Siguiente;
                 }
@@ -67,5 +66,20 @@ namespace proyecto_1_IPC2.Modelos
         {
             Cabeza = null;
         }
+
+
+        public void RecorrerYSimular()
+        {
+            NodoPaciente actual = Cabeza;
+
+            while (actual != null)
+            {
+                actual.Dato.Simulacion();
+                actual = actual.Siguiente;
+            }
+        }
     }
+
 }
+
+

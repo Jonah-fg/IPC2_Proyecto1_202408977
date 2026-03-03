@@ -1,4 +1,5 @@
-﻿using System;
+﻿using proyecto_1_IPC2.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,16 @@ namespace proyecto_1_IPC2
     {
         static void Main(string[] args)
         {
+            ListaPacientes lista = new ListaPacientes();
+            LectorXML lector = new LectorXML();
+
+            lector.Cargar("entrada.xml", lista);
+
+            // Ejecutar simulación para todos
+            lista.RecorrerYSimular();
+
+            // Mostrar resultados
+            lista.Mostrar();
         }
     }
 }

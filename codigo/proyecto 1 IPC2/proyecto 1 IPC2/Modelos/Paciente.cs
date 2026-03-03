@@ -19,31 +19,43 @@ namespace proyecto_1_IPC2.Modelos
 
         public Paciente(string nombre, int edad, int m, int periodos)
         {
-            Nombre = nombre;
-            Edad = edad;
-            M = m;
-            RejillaInicial = new Rejilla(m);
+            Nombre =nombre;
+            Edad =edad;
+            M =m;
+            RejillaInicial=new Rejilla(m);
             PeriodosMax = periodos;
             
         }
 
         public void Simulacion() 
         {
-            Rejilla actual = RejillaInicial;
+            ListaEstado listaE =new ListaEstado();
+            Rejilla actual=RejillaInicial;
 
-            for (int periodo = 1; periodo<= PeriodosMax; periodo++)
+            String estadoInicial=actual.ObtenerEstado();
+            listaE.agragar(estadoInicial, 0); 
+
+            for (int periodo=1;periodo<=PeriodosMax; periodo++)
             {
-                Rejilla siguiente = actual.GenerarSiguienteRejilla();
+                Rejilla siguiente =actual.GenerarSiguienteRejilla();
+                String estadoActual=siguiente.ObtenerEstado();
+                NodoEstado encontrado=listaE.Buscar(estadoActual);
 
-                // Si todas murieron
-                if (siguiente.ContarContagiadas() == 0)
+                if (encontrado!=null)
                 {
-                    Resultado = "Mortal";
+                    int N=encontrado.Periodo;
+                    int N1 =periodo-N;
+
+                    if (N1==1)
+                        Resultado = "Mortal";
+                    else
+                        Resultado = "Grave";
                     return;
                 }
-                actual = siguiente;
+                listaE.agragar(estadoActual, periodo);
+                actual=siguiente;
             }
-            Resultado = "Grave";
+            Resultado="Leve";
         }
     }
 }

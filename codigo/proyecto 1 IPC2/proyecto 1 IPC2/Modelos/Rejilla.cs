@@ -9,23 +9,23 @@ namespace proyecto_1_IPC2.Modelos
     public class Rejilla
     {
         public int[,] Celdas{ get; set; }
-        public int M { get; set; }
+        public int M{ get; set; }
 
         public Rejilla(int m)
         {
-            M = m;
+            M=m;
             Celdas = new int[m, m];
         }
 
         public int ContarVecinos(int fila, int columna) 
         {
-            int contador =0;
+            int contador=0;
 
             for (int i=fila-1;i<=fila +1; i++)
             {
                 for (int j=columna-1; j<=columna+1; j++)
                 {
-                    if (i >= 0 && i < M && j>=0 && j< M)
+                    if (i >= 0 && i<M && j>=0 && j< M)
                     {
                         // No contar la celda misma
                         if (!(i==fila && j==columna))
@@ -44,7 +44,7 @@ namespace proyecto_1_IPC2.Modelos
 
         public Rejilla GenerarSiguienteRejilla()
         {
-            Rejilla nueva = new Rejilla(M);
+            Rejilla nueva =new Rejilla(M);
             for (int i=0; i<M; i++)
             {
                 for (int j=0; j<M; j++)
@@ -97,15 +97,14 @@ namespace proyecto_1_IPC2.Modelos
 
         public string ObtenerEstado()
         {
-            string estado = "";
-            for (int i=0; i <M;i++)
+            string estado ="";
+            for (int i=0; i<M;i++)
             {
-                for (int j =0; j<M;j++)
+                for (int j=0; j<M;j++)
                 {
-                    estado += Celdas[i,j];
+                    estado +=Celdas[i,j];
                 }
             }
-
             return estado;
         }
 
