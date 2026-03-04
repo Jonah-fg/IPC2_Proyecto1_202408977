@@ -57,10 +57,14 @@ namespace proyecto_1_IPC2.Modelos
 
             while (actual != null)
             {
-                Console.WriteLine("Paciente: "+ actual.Dato.Nombre);
-                actual = actual.Siguiente;
+                Console.WriteLine("Paciente: "+actual.Dato.Nombre);
+                Console.WriteLine("Resultado: "+actual.Dato.Resultado);
+                Console.WriteLine("---------------------------");
+
+                actual=actual.Siguiente;
             }
         }
+
 
         public void Limpiar()
         {
@@ -75,11 +79,8 @@ namespace proyecto_1_IPC2.Modelos
             while (actual != null)
             {
                 actual.Dato.Simulacion();
-                actual = actual.Siguiente;
+                actual=actual.Siguiente;
             }
         }
     }
-
 }
-
-

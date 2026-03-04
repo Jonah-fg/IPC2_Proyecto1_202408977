@@ -47,9 +47,9 @@ namespace proyecto_1_IPC2.Modelos
                     int N1 =periodo-N;
 
                     if (N1==1)
-                        Resultado = "Mortal";
+                        Resultado ="Mortal";
                     else
-                        Resultado = "Grave";
+                        Resultado ="Grave";
                     return;
                 }
                 listaE.agragar(estadoActual, periodo);
@@ -57,5 +57,6 @@ namespace proyecto_1_IPC2.Modelos
             }
             Resultado="Leve";
         }
+
     }
 }

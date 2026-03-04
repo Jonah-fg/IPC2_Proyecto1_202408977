@@ -16,10 +16,8 @@ namespace proyecto_1_IPC2
 
             lector.Cargar("entrada.xml", lista);
 
-            // Ejecutar simulación para todos
             lista.RecorrerYSimular();
 
-            // Mostrar resultados
             lista.Mostrar();
         }
     }

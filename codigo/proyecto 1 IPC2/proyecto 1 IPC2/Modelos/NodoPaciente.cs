@@ -10,7 +10,6 @@ namespace proyecto_1_IPC2.Modelos
     {
         public Paciente Dato { get; set; }
         public NodoPaciente Siguiente { get; set; }
-
         public NodoPaciente(Paciente dato)
         {
             Dato = dato;

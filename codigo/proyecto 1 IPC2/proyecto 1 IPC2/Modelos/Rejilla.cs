@@ -23,11 +23,10 @@ namespace proyecto_1_IPC2.Modelos
 
             for (int i=fila-1;i<=fila +1; i++)
             {
-                for (int j=columna-1; j<=columna+1; j++)
+                for (int j=columna-1;j<=columna+1; j++)
                 {
                     if (i >= 0 && i<M && j>=0 && j< M)
                     {
-                        // No contar la celda misma
                         if (!(i==fila && j==columna))
                         {
                             if (Celdas[i, j]==1)
@@ -54,11 +53,11 @@ namespace proyecto_1_IPC2.Modelos
                     {
                         if (vecinosVivos ==2 ||vecinosVivos ==3)
                         {
-                            nueva.Celdas[i, j]=0; // Muere
+                            nueva.Celdas[i, j]=1; // Muere
                         }
                         else
                         {
-                            nueva.Celdas[i, j]=1; // Permanece viva
+                            nueva.Celdas[i, j]=0; // Permanece viva
                         }
                     }
 
@@ -97,7 +96,7 @@ namespace proyecto_1_IPC2.Modelos
 
         public string ObtenerEstado()
         {
-            string estado ="";
+            string estado="";
             for (int i=0; i<M;i++)
             {
                 for (int j=0; j<M;j++)

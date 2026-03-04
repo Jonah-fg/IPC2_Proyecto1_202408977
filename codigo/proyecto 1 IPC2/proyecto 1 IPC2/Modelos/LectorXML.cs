@@ -13,7 +13,6 @@ namespace proyecto_1_IPC2.Modelos
         {
             XmlDocument doc=new XmlDocument();
             doc.Load(ruta);
-
             XmlNodeList pacientes=doc.GetElementsByTagName("paciente");
 
             foreach(XmlNode pacienteNode in pacientes)
@@ -23,7 +22,7 @@ namespace proyecto_1_IPC2.Modelos
                 int periodos= int.Parse(pacienteNode["periodos"].InnerText);
                 int m=int.Parse(pacienteNode["m"].InnerText);
 
-                Paciente paciente=new Paciente(nombre, edad, m, periodos);
+                Paciente paciente=new Paciente(nombre,edad, m, periodos);
 
                 XmlNodeList celdas=pacienteNode["rejilla"].GetElementsByTagName("celda");
 
@@ -32,7 +31,7 @@ namespace proyecto_1_IPC2.Modelos
                     int fila=int.Parse(celda.Attributes["f"].Value)-1;
                     int columna=int.Parse(celda.Attributes["c"].Value)-1;
 
-                    paciente.RejillaInicial.Celdas[fila, columna] = 1;
+                    paciente.RejillaInicial.Celdas[fila,columna]=1;
                 }
 
                 lista.Insertar(paciente);

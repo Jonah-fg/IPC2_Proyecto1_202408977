@@ -13,8 +13,8 @@ namespace proyecto_1_IPC2.Modelos
         public NodoEstado Siguiente { get; set; }
         public NodoEstado(String estado, int periodo) 
         { 
-            Estado = estado;
-            Periodo = periodo;
+            Estado =estado;
+            Periodo =periodo;
             Siguiente = null;
 
         }

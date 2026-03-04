@@ -59,5 +59,10 @@
   <ItemGroup>
     <Folder Include="servicios\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="entrada.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
