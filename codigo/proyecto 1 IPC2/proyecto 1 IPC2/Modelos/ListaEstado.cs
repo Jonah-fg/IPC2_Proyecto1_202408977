@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace proyecto_1_IPC2.Modelos
 {
-    internal class ListaEstado
+    public class ListaEstado
     {
         public NodoEstado Cabeza { get; set; }
         public ListaEstado() 

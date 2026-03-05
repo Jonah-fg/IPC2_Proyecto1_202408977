@@ -14,6 +14,7 @@ namespace proyecto_1_IPC2.Modelos
         public int PeriodosMax { get; set; }
         public string Resultado { get; set; }
         public Rejilla RejillaInicial { get; set; }
+        public ListaEstado ListaEstados { get; set; }
         public int N { get; set; }
         public int N1 { get; set; }
 
@@ -24,27 +25,30 @@ namespace proyecto_1_IPC2.Modelos
             M =m;
             RejillaInicial=new Rejilla(m);
             PeriodosMax = periodos;
-            
+            Resultado="";
+            N=0;
+            N1=0;
         }
 
         public void Simulacion() 
         {
-            ListaEstado listaE =new ListaEstado();
+            ListaEstados=new ListaEstado();
             Rejilla actual=RejillaInicial;
 
             String estadoInicial=actual.ObtenerEstado();
-            listaE.agragar(estadoInicial, 0); 
+            ListaEstados.agragar(estadoInicial, 0); 
 
             for (int periodo=1;periodo<=PeriodosMax; periodo++)
             {
                 Rejilla siguiente =actual.GenerarSiguienteRejilla();
                 String estadoActual=siguiente.ObtenerEstado();
-                NodoEstado encontrado=listaE.Buscar(estadoActual);
+                NodoEstado encontrado=ListaEstados.Buscar(estadoActual);
 
                 if (encontrado!=null)
                 {
-                    int N=encontrado.Periodo;
-                    int N1 =periodo-N;
+                    ListaEstados.agragar(estadoActual, periodo);
+                    N =encontrado.Periodo;
+                    N1 =periodo-N;
 
                     if (N1==1)
                         Resultado ="Mortal";
@@ -52,7 +56,7 @@ namespace proyecto_1_IPC2.Modelos
                         Resultado ="Grave";
                     return;
                 }
-                listaE.agragar(estadoActual, periodo);
+                ListaEstados.agragar(estadoActual, periodo);
                 actual=siguiente;
             }
             Resultado="Leve";

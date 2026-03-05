@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\CargadorXML.cs" />
+    <Compile Include="Modelos\GeneradorGraphviz.cs" />
+    <Compile Include="Modelos\GeneradorXML.cs" />
     <Compile Include="Modelos\LectorXML.cs" />
     <Compile Include="Modelos\ListaEstado.cs" />
     <Compile Include="Modelos\ListaPacientes.cs" />

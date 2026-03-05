@@ -8,7 +8,7 @@ namespace proyecto_1_IPC2.Modelos
 {
     internal class ListaPacientes
     {
-        private NodoPaciente Cabeza; 
+        public NodoPaciente Cabeza { get; set; }
         public ListaPacientes()
         {
             Cabeza =null;
