@@ -65,6 +65,16 @@ namespace proyecto_1_IPC2.Modelos
             }
         }
 
+        public void MostrarNombres()
+        {
+            NodoPaciente actual=Cabeza;
+            while (actual!=null)
+            {
+                Console.WriteLine("- "+ actual.Dato.Nombre);
+                actual=actual.Siguiente;
+            }
+        }
+
 
         public void Limpiar()
         {

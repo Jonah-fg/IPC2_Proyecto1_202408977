@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace proyecto_1_IPC2.Modelos
 {
-    public class Paciente
+    internal class Paciente
     {
         public String Nombre { get; set; }
         public int Edad {get; set;}
@@ -34,6 +34,7 @@ namespace proyecto_1_IPC2.Modelos
         {
             ListaEstados=new ListaEstado();
             Rejilla actual=RejillaInicial;
+            bool patronEncontrado = false;
 
             String estadoInicial=actual.ObtenerEstado();
             ListaEstados.agragar(estadoInicial, 0); 
@@ -44,22 +45,21 @@ namespace proyecto_1_IPC2.Modelos
                 String estadoActual=siguiente.ObtenerEstado();
                 NodoEstado encontrado=ListaEstados.Buscar(estadoActual);
 
-                if (encontrado!=null)
-                {
-                    ListaEstados.agragar(estadoActual, periodo);
-                    N =encontrado.Periodo;
+                if (encontrado!=null &&!patronEncontrado)
+                {                    N =encontrado.Periodo;
                     N1 =periodo-N;
 
                     if (N1==1)
                         Resultado ="Mortal";
                     else
                         Resultado ="Grave";
-                    return;
+                    patronEncontrado=true;
                 }
                 ListaEstados.agragar(estadoActual, periodo);
                 actual=siguiente;
             }
-            Resultado="Leve";
+            if (!patronEncontrado)
+                Resultado ="Leve";
         }
 
     }

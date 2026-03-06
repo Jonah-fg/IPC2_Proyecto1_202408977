@@ -14,8 +14,8 @@ namespace proyecto_1_IPC2
             ListaPacientes lista= new ListaPacientes();
             CargadorXML cargadorXML=new CargadorXML();
             GeneradorXML generadorXML=new GeneradorXML();
-            GeneradorGraphviz generadorGraphviz=new GeneradorGraphviz();
-            bool salir=false;
+            GeneradorGraphviz generadorGraphviz = new GeneradorGraphviz();
+            bool salir = false;
 
             while (!salir)
             {
@@ -27,7 +27,7 @@ namespace proyecto_1_IPC2
                 Console.WriteLine("5. Limpiar memoria");
                 Console.WriteLine("6. Salir");
                 Console.Write("Seleccione una opción: ");
-                string opcion=Console.ReadLine();
+                string opcion = Console.ReadLine();
 
                 switch (opcion)
                 {
@@ -37,16 +37,50 @@ namespace proyecto_1_IPC2
                         break;
 
                     case "2":
-                        NodoPaciente actual = lista.Cabeza;
-
-                        while (actual != null)
+                        if (lista.Cabeza == null)
                         {
-                            actual.Dato.Simulacion();
-                            Console.WriteLine($"Paciente: {actual.Dato.Nombre}");
-                            Console.WriteLine($"Resultado: {actual.Dato.Resultado}");
-                            Console.WriteLine("---------------------------");
+                            Console.WriteLine("Primero cargue un archivo XML.");
+                            break;
+                        }
+                        Console.WriteLine("Pacientes disponibles:");
+                        lista.MostrarNombres();
 
-                            actual=actual.Siguiente;
+                        Console.Write("Ingrese el nombre del paciente: ");
+                        string nombre = Console.ReadLine();
+
+                        Paciente paciente =lista.Buscar(nombre);
+
+                        if (paciente == null)
+                        {
+                            Console.WriteLine("Paciente no encontrado.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("1. Simulación automática");
+                            Console.WriteLine("2. Simulación paso a paso");
+                            Console.Write("Seleccione opción: ");
+                            string tipo = Console.ReadLine();
+
+                            if (tipo == "1")
+                            {
+                                paciente.Simulacion();
+                                paciente.Simulacion();
+                                Console.WriteLine($"\n RESULTADO COMPLETO:");
+                                Console.WriteLine($"   Resultado: {paciente.Resultado}");
+                                Console.WriteLine($"   N (período donde apareció el patrón): {paciente.N}");
+                                Console.WriteLine($"   N1 (cada cuánto se repite): {paciente.N1}");
+
+                                if (paciente.N1 == 1)
+                                    Console.WriteLine("   Enfermedad MORTAL (se repite cada período)");
+                                else if (paciente.N1>1)
+                                    Console.WriteLine("   Enfermedad GRAVE");
+                                else
+                                    Console.WriteLine("   Enfermedad LEVE");
+                            }
+                            else if (tipo == "2")
+                            {
+                                SimulacionPasoAPaso(paciente);
+                            }
                         }
                         break;
 
@@ -56,17 +90,32 @@ namespace proyecto_1_IPC2
                         break;
 
                     case "4":
-                        NodoPaciente nodo = lista.Cabeza;
-
-                        while (nodo != null)
+                        if (lista.Cabeza==null)
                         {
-                            string nombreArchivo = "grafo_" + nodo.Dato.Nombre + ".dot";
-                            generadorGraphviz.Generar(nombreArchivo, nodo.Dato.ListaEstados);
-                            nodo = nodo.Siguiente;
+                            Console.WriteLine("Primero cargue y simule pacientes.");
+                            break;
                         }
+                        Console.WriteLine("\nPacientes disponibles:");
+                        lista.MostrarNombres();
 
-                        Console.WriteLine("Archivos .dot generados correctamente.");
+                        Console.Write("\nIngrese el nombre del paciente: ");
+                        string nombrePaciente=Console.ReadLine();
+
+                        Paciente pacienteSeleccionado=lista.Buscar(nombrePaciente);
+                        if (pacienteSeleccionado==null)
+                        {
+                            Console.WriteLine("Paciente no encontrado.");
+                        }
+                        else if (pacienteSeleccionado.ListaEstados==null)
+                        {
+                            Console.WriteLine("Primero debe simular este paciente (opción 2).");
+                        }
+                        else
+                        {
+                            generadorGraphviz.GenerarImagenesRejilla(pacienteSeleccionado);
+                        }
                         break;
+
 
                     case "5":
                         lista.Limpiar();
@@ -74,7 +123,8 @@ namespace proyecto_1_IPC2
                         break;
 
                     case "6":
-                        salir = true;
+                        salir=true;
+                        Console.WriteLine("Programa finalizado.");
                         break;
 
                     default:
@@ -82,8 +132,48 @@ namespace proyecto_1_IPC2
                         break;
                 }
             }
-
-            Console.WriteLine("Programa finalizado.");
         }
+
+
+            static void SimulacionPasoAPaso(Paciente paciente)
+            {
+                Rejilla actual = paciente.RejillaInicial;
+
+                for (int periodo = 0; periodo <= paciente.PeriodosMax; periodo++)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Paciente: {paciente.Nombre}");
+                    Console.WriteLine($"Período: {periodo}");
+
+                    MostrarRejilla(actual);
+
+                    int contagiadas =actual.ContarContagiadas();
+                    int sanas =paciente.M * paciente.M - contagiadas;
+
+                    Console.WriteLine($"Contagiadas: {contagiadas}");
+                    Console.WriteLine($"Sanas: {sanas}");
+
+                    Console.WriteLine("Presione ENTER para siguiente período...");
+                    Console.ReadLine();
+
+                    actual=actual.GenerarSiguienteRejilla();
+                }
+            }
+
+            static void MostrarRejilla(Rejilla rejilla)
+            {
+                for (int i=0;i<rejilla.M; i++)
+                {
+                    for (int j=0; j<rejilla.M; j++)
+                    {
+                        if (rejilla.Celdas.ContieneCelda(i,j) )
+                            Console.Write("0 ");
+                        else
+                            Console.Write("1 ");
+                    }
+                    Console.WriteLine();
+                }
+            }
     }
+
 }

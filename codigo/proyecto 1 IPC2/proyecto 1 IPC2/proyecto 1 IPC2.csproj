@@ -46,9 +46,10 @@
     <Compile Include="Modelos\CargadorXML.cs" />
     <Compile Include="Modelos\GeneradorGraphviz.cs" />
     <Compile Include="Modelos\GeneradorXML.cs" />
-    <Compile Include="Modelos\LectorXML.cs" />
+    <Compile Include="Modelos\ListaCelda.cs" />
     <Compile Include="Modelos\ListaEstado.cs" />
     <Compile Include="Modelos\ListaPacientes.cs" />
+    <Compile Include="Modelos\NodoCelda.cs" />
     <Compile Include="Modelos\NodoEstado.cs" />
     <Compile Include="Modelos\NodoPaciente.cs" />
     <Compile Include="Modelos\Paciente.cs" />

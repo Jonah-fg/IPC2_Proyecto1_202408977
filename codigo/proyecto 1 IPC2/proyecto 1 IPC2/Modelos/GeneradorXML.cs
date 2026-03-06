@@ -44,13 +44,13 @@ namespace proyecto_1_IPC2.Modelos
                 pacienteXml.AppendChild(periodos);
                 pacienteXml.AppendChild(m);
                 pacienteXml.AppendChild(resultado);
-                if (paciente.Resultado != "leve")
+                if (paciente.Resultado !="leve")
                 {
-                    XmlElement n =doc.CreateElement("n");
+                    XmlElement n=doc.CreateElement("n");
                     n.InnerText =paciente.N.ToString();
                     pacienteXml.AppendChild(n);
 
-                    XmlElement n1 =doc.CreateElement("n1");
+                    XmlElement n1=doc.CreateElement("n1");
                     n1.InnerText=paciente.N1.ToString();
                     pacienteXml.AppendChild(n1);
                 }
